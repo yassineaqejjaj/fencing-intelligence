@@ -27,6 +27,7 @@ from fencing_api.models import (
     ConsentRecord,
     Exercise,
     FencingPhrase,
+    Organization,
     OrganizationMembership,
     Report,
     ScoreEvent,
