@@ -157,7 +157,7 @@ export default function AnalysisPage() {
           <Card className="overflow-hidden !p-0">
             {video.status === "failed" ? <p role="alert" className="p-5 text-sm text-danger">{video.error || "Processing failed"}</p> : null}
             {video.status === "ready" && video.width && video.height ? (
-              <div className="border-b border-white/10 p-4">
+              <div className="border-b border-line p-4">
                 <RoiEditor videoId={video.id} width={video.width} height={video.height} posterUrl={playback.data?.thumbnail_url ?? null} />
               </div>
             ) : null}
@@ -178,7 +178,7 @@ export default function AnalysisPage() {
                   : "This sheet has validated marks and no video file yet. Upload the bout video to attach the picture. The reading still uses only what a person validated."}
               </p>
             ) : null}
-            <div className="flex flex-wrap items-center gap-2 border-t border-white/10 p-4">
+            <div className="flex flex-wrap items-center gap-2 border-t border-line p-4">
               <button
                 type="button"
                 className={secondaryButton}
@@ -192,14 +192,14 @@ export default function AnalysisPage() {
               >
                 {paused ? <Play size={15} /> : <Pause size={15} />}
               </button>
-              <div className="flex rounded-full border border-white/10 bg-black/30 p-1" role="group" aria-label="Playback speed">
+              <div className="flex rounded-full border border-line bg-black/30 p-1" role="group" aria-label="Playback speed">
                 {[0.25, 0.5, 1, 1.5, 2].map((value) => (
                   <button
                     key={value}
                     type="button"
                     onClick={() => setRate(value)}
                     aria-pressed={rate === value}
-                    className={`rounded-full px-3 py-1 text-xs font-semibold tabular-nums transition-all ${rate === value ? "bg-primary text-[#04121a]" : "text-muted hover:text-text"}`}
+                    className={`rounded-full px-3 py-1 text-xs font-semibold tabular-nums transition-all ${rate === value ? "bg-primary text-tenue" : "text-muted hover:text-text"}`}
                   >
                     {value}×
                   </button>
@@ -209,7 +209,7 @@ export default function AnalysisPage() {
               <button type="button" className={secondaryButton} onClick={() => videoRef.current && setLoopOut(Math.round(videoRef.current.currentTime * 1000))}>Loop out{loopOut !== null ? ` · ${(loopOut / 1000).toFixed(1)}s` : ""}</button>
             </div>
             <div className="px-4 pb-4">
-              <div className="relative h-12 overflow-hidden rounded-2xl border border-white/10 bg-black/40">
+              <div className="relative h-12 overflow-hidden rounded-2xl border border-line bg-black/40">
                 <div className="absolute inset-x-3 top-1/2 h-1 -translate-y-1/2 rounded-full bg-white/10" />
                 {(annotations.data?.items || []).map((item) => (
                   <button
@@ -309,21 +309,21 @@ export default function AnalysisPage() {
         </div>
 
         <form
-          className="grid content-start gap-4 rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.055] to-white/[0.015] p-5 xl:sticky xl:top-20"
+          className="grid content-start gap-4 rounded-3xl border border-line bg-gradient-to-b from-surface to-surface p-5 xl:sticky xl:top-20"
           onSubmit={(event) => {
             event.preventDefault();
             save.mutate();
           }}
         >
           <h2 className="text-sm font-semibold tracking-wide">Annotation</h2>
-          <div className="flex rounded-full border border-white/10 bg-black/30 p-1" role="group" aria-label="Annotation mode">
+          <div className="flex rounded-full border border-line bg-black/30 p-1" role="group" aria-label="Annotation mode">
             {["simplified", "tactical", "technical"].map((item) => (
               <button
                 key={item}
                 type="button"
                 onClick={() => setMode(item)}
                 aria-pressed={mode === item}
-                className={`flex-1 rounded-full px-3 py-1.5 text-xs font-semibold capitalize transition-all ${mode === item ? "bg-primary text-[#04121a]" : "text-muted hover:text-text"}`}
+                className={`flex-1 rounded-full px-3 py-1.5 text-xs font-semibold capitalize transition-all ${mode === item ? "bg-primary text-tenue" : "text-muted hover:text-text"}`}
               >
                 {item}
               </button>
@@ -379,7 +379,7 @@ export default function AnalysisPage() {
           </button>
           <ul className="grid gap-2 text-sm">
             {(annotations.data?.items || []).map((item) => (
-              <li key={item.id} className="flex items-center justify-between gap-2 rounded-2xl border border-white/[0.07] bg-black/30 px-3 py-2">
+              <li key={item.id} className="flex items-center justify-between gap-2 rounded-2xl border border-line bg-black/30 px-3 py-2">
                 <span className="truncate">{item.action_type_code} · {item.outcome || "no outcome"}{item.source !== "human" ? " · suggestion" : ""}</span>
                 <Badge tone={item.status === "validated" ? "success" : "warning"}>{item.status}</Badge>
               </li>

@@ -171,7 +171,7 @@ function Cards({ cards, copy, locale, minimum, athleteHref, heading, subheading 
             const text = locale === "fr" ? card.text_fr : card.text_en;
             const evidence = card.evidence;
             return (
-              <li key={card.code} className={`relative overflow-hidden rounded-3xl border ${tone.ring} bg-gradient-to-b ${tone.glow} to-transparent p-5`}>
+              <li key={card.code} className={`relative overflow-hidden rounded-3xl border ${tone.ring} bg-gradient-to-b ${tone.glow} to-surface p-5`}>
                 <div className="flex items-center justify-between gap-2">
                   <span className="flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.14em] text-muted uppercase">
                     <Icon size={13} className={card.tone === "strength" ? "text-success" : card.tone === "weakness" ? "text-warning" : "text-primary"} />
@@ -203,7 +203,7 @@ function Cards({ cards, copy, locale, minimum, athleteHref, heading, subheading 
 function RateBar({ rate, accent = "bg-primary" }: { rate: Rate; accent?: string }) {
   const value = rate.value;
   return (
-    <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
+    <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface">
       {value === null ? null : <div className={`h-full rounded-full ${accent} transition-[width] duration-500 ease-out motion-reduce:transition-none`} style={{ width: `${Math.round(value * 100)}%` }} />}
     </div>
   );
@@ -229,7 +229,7 @@ function Situations({ data, copy, minimum }: { data: Intelligence; copy: Copy; m
           const state = situations.states[key];
           const ready = state.touch_share.denominator >= minimum;
           return (
-            <div key={key} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+            <div key={key} className="rounded-2xl border border-line bg-surface p-4">
               <p className="text-[11px] font-semibold tracking-[0.12em] text-muted uppercase">{label}</p>
               <p className={`mt-2 text-[1.7rem] leading-none font-semibold tracking-tight tabular-nums ${ready ? "" : "text-muted"}`}>{shownRate(state.touch_share, minimum)}</p>
               <div className="mt-3"><RateBar rate={ready ? state.touch_share : { ...state.touch_share, value: null }} accent={accent} /></div>
@@ -241,11 +241,11 @@ function Situations({ data, copy, minimum }: { data: Intelligence; copy: Copy; m
         })}
       </div>
       <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
-        <div className="flex items-center justify-between rounded-2xl border border-white/10 px-4 py-3">
+        <div className="flex items-center justify-between rounded-2xl border border-line px-4 py-3">
           <dt className="text-muted">{copy.firstTouch}</dt>
           <dd className="font-semibold tabular-nums">{shownRate(situations.first_touch_rate, minimum)} <span className="text-xs font-normal text-muted">· {situations.first_touch_rate.denominator} {copy.bouts}</span></dd>
         </div>
-        <div className="flex items-center justify-between rounded-2xl border border-white/10 px-4 py-3">
+        <div className="flex items-center justify-between rounded-2xl border border-line px-4 py-3">
           <dt className="text-muted">{copy.lastTouch}</dt>
           <dd className="font-semibold tabular-nums">{shownRate(situations.last_touch_rate, minimum)} <span className="text-xs font-normal text-muted">· {situations.last_touch_rate.denominator} {copy.bouts}</span></dd>
         </div>
@@ -269,12 +269,12 @@ function Profile({ profile, copy, locale, minimum }: { profile: NonNullable<Inte
               <span className="capitalize">{pretty(name)}</span>
               <span className="text-xs text-muted tabular-nums">{value.attempts} {copy.attempts} · {shownRate(value.success_rate, minimum)}</span>
             </div>
-            <RateBar rate={value.share} accent="bg-secondary" />
+            <RateBar rate={value.share} accent="bg-mask" />
           </li>
         ))}
       </ul>
       {actions.length ? (
-        <ul className="mt-5 grid gap-2 border-t border-white/10 pt-4">
+        <ul className="mt-5 grid gap-2 border-t border-line pt-4">
           {actions.map(([code, value]) => (
             <li key={code} className="flex items-center justify-between gap-3 text-sm">
               <span className="flex items-center gap-2">
@@ -327,7 +327,7 @@ function Momentum({ data, copy }: { data: Intelligence; copy: Copy }) {
         <Mini label="Win rate" value={formatRate(momentum.win_rate)} />
       </dl>
       {momentum.bouts.length ? (
-        <ul className="mt-4 grid gap-1.5 border-t border-white/10 pt-4 text-sm">
+        <ul className="mt-4 grid gap-1.5 border-t border-line pt-4 text-sm">
           {momentum.bouts.slice(-6).reverse().map((bout) => (
             <li key={bout.bout_id} className="flex items-center justify-between gap-3">
               <Link href={`/bouts/${bout.bout_id}`} className="truncate text-muted hover:text-text">{bout.date ?? "—"}</Link>
@@ -354,8 +354,8 @@ function Mini({ label, value, accent = "text-text", icon: Icon, href }: { label:
       <dd className={`mt-1.5 text-xl leading-none font-semibold tabular-nums ${accent}`}>{value}</dd>
     </>
   );
-  const className = "rounded-2xl border border-white/10 bg-white/[0.03] p-3";
-  return href ? <Link href={href} className={`${className} block hover:bg-white/[0.06]`}>{body}</Link> : <div className={className}>{body}</div>;
+  const className = "rounded-2xl border border-line bg-surface p-3";
+  return href ? <Link href={href} className={`${className} block hover:bg-surface`}>{body}</Link> : <div className={className}>{body}</div>;
 }
 
 function Trend({ data, copy }: { data: Intelligence; copy: Copy }) {
@@ -379,7 +379,7 @@ function Trend({ data, copy }: { data: Intelligence; copy: Copy }) {
         <div className="mt-3"><Empty>{fill(copy.trendInsufficient, { k: 0, n: trend.minimum_bouts })}</Empty></div>
       ) : (
         <>
-          {!trend.direction ? <p className="mt-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-2.5 text-xs text-muted">{fill(copy.trendInsufficient, { k: points.length, n: trend.minimum_bouts })}</p> : null}
+          {!trend.direction ? <p className="mt-3 rounded-2xl border border-line bg-surface px-4 py-2.5 text-xs text-muted">{fill(copy.trendInsufficient, { k: points.length, n: trend.minimum_bouts })}</p> : null}
           <div className="mt-3 h-52">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={points} margin={{ top: 8, right: 8, bottom: 0, left: -16 }}>
@@ -423,7 +423,7 @@ function Opponents({ data, copy }: { data: Intelligence; copy: Copy }) {
           </thead>
           <tbody>
             {data.opponents!.map((row) => (
-              <tr key={row.opponent_id} className="border-t border-white/10">
+              <tr key={row.opponent_id} className="border-t border-line">
                 <td className="py-2.5 pr-3">
                   <Link href={`/athletes/${row.opponent_id}`} className="font-medium hover:underline">{names[row.opponent_id] ?? row.opponent_id.slice(0, 8)}</Link>
                 </td>
@@ -539,8 +539,8 @@ export function BoutStory({ data }: { data: BoutMomentum }) {
           : "Score rebuilt only from validated touches. This is not a referee decision."}
       </p>
       <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Mini label={leftName} value={`${data.left?.score ?? last.left}`} accent="text-primary" />
-        <Mini label={rightName} value={`${data.right?.score ?? last.right}`} accent="text-secondary" />
+        <Mini label={leftName} value={`${data.left?.score ?? last.left}`} accent="text-lamp-red" />
+        <Mini label={rightName} value={`${data.right?.score ?? last.right}`} accent="text-lamp-green" />
         <Mini label={locale === "fr" ? "Changements de tête" : "Lead changes"} value={String(data.lead_changes)} />
         <Mini label={locale === "fr" ? "Plus longue série" : "Longest run"} value={String(Math.max(data.left?.longest_run ?? 0, data.right?.longest_run ?? 0))} icon={Flame} />
       </dl>
@@ -553,10 +553,10 @@ export function BoutStory({ data }: { data: BoutMomentum }) {
               <span
                 className={`inline-flex min-w-8 items-center justify-center rounded-full px-2 py-1 text-[11px] font-semibold tabular-nums ${
                   row.scorer === "unknown"
-                    ? "bg-white/10 text-muted"
+                    ? "bg-tenue text-muted"
                     : mine
-                      ? "bg-primary/20 text-primary"
-                      : "bg-secondary/20 text-secondary"
+                      ? "bg-lamp-red/15 text-lamp-red"
+                      : "bg-lamp-green/15 text-lamp-green"
                 } ${hot ? "ring-1 ring-warning/60" : ""}`}
                 title={`${row.left}–${row.right}${hot ? ` · ${row.run_length}` : ""}`}
               >

@@ -63,7 +63,7 @@ export default function CompetitionsPage() {
           {competitions.data.items.map((competition) => (
             <li key={competition.id}>
               <RowLink href={`/competitions/${competition.id}`}>
-                <span className="flex flex-1 items-center gap-3 rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.055] to-white/[0.015] p-4">
+                <span className="flex flex-1 items-center gap-3 rounded-3xl border border-line bg-gradient-to-b from-surface to-surface p-4">
                   <Avatar name={competition.name} />
                   <span className="min-w-0">
                     <span className="block truncate font-medium">{competition.name}</span>

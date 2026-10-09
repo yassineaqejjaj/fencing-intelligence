@@ -62,7 +62,7 @@ function prettify(name: string) {
 
 function Stat({ label, value, icon: Icon, accent = "text-text" }: { label: string; value: string; icon?: typeof Medal; accent?: string }) {
   return (
-    <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.055] to-white/[0.015] p-4">
+    <div className="rounded-3xl border border-line bg-gradient-to-b from-surface to-surface p-4">
       <dt className="flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.12em] text-muted uppercase">
         {Icon ? <Icon size={13} className="text-primary" /> : null}
         {label}

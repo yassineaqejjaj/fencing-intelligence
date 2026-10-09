@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ChartLine, Clapperboard, Plus, Swords, Users } from "lucide-react";
 import { api, type Intelligence } from "@/lib/api";
 import { IntelligenceView } from "@/components/intelligence-view";
-import { ErrorNote, Loading } from "@/components/states";
+import { buttonClass, ErrorNote, Loading, secondaryButton } from "@/components/states";
 import { Avatar, Badge, Card, PageHeader, RowLink, ScorePill, StatCard } from "@/components/ui";
 import { useI18n } from "@/lib/i18n";
 
@@ -53,10 +53,10 @@ export default function DashboardPage() {
         }
         actions={
           <>
-            <Link href="/videos/upload" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-[#5eead4] px-4 py-2 text-sm font-semibold text-[#04121a] shadow-[0_8px_32px_-8px_rgb(0_212_255/0.5)] transition-all hover:brightness-110 active:scale-[0.97]">
+            <Link href="/videos/upload" className={buttonClass}>
               <Plus size={15} /> Upload bout
             </Link>
-            <Link href="/bouts" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-sm font-medium transition-colors hover:bg-white/[0.1]">
+            <Link href="/bouts" className={secondaryButton}>
               <Swords size={15} /> New bout
             </Link>
           </>
@@ -80,7 +80,7 @@ export default function DashboardPage() {
           {recent.length === 0 ? (
             <p className="py-6 text-center text-sm text-muted">No bouts yet.</p>
           ) : (
-            <ul className="divide-y divide-white/[0.07]">
+            <ul className="divide-y divide-line">
               {recent.map((bout) => (
                 <li key={bout.id}>
                   <RowLink href={`/bouts/${bout.id}`}>

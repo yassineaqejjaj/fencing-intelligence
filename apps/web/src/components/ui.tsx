@@ -19,7 +19,7 @@ export function PageHeader({
     <div className="fi-rise flex flex-wrap items-end justify-between gap-4">
       <div className="max-w-2xl">
         {eyebrow ? (
-          <p className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[11px] font-semibold tracking-[0.16em] text-primary uppercase">
+          <p className="mb-2 font-mono text-[11px] font-medium tracking-[0.14em] text-muted uppercase">
             {eyebrow}
           </p>
         ) : null}
@@ -34,7 +34,7 @@ export function PageHeader({
 export function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <section
-      className={`rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.055] to-white/[0.015] p-5 shadow-[0_12px_32px_-16px_rgb(0_0_0/0.6)] ${className}`}
+      className={`rounded-xl border border-line bg-surface p-5 ${className}`}
     >
       {children}
     </section>
@@ -43,14 +43,14 @@ export function Card({ children, className = "" }: { children: React.ReactNode; 
 
 export function Badge({ tone = "neutral", children }: { tone?: "neutral" | "success" | "warning" | "danger" | "info"; children: React.ReactNode }) {
   const tones: Record<string, string> = {
-    neutral: "border-white/10 bg-white/[0.06] text-muted",
-    success: "border-success/30 bg-success/10 text-success",
-    warning: "border-warning/30 bg-warning/10 text-warning",
-    danger: "border-danger/30 bg-danger/10 text-danger",
-    info: "border-primary/30 bg-primary/10 text-primary",
+    neutral: "border-line bg-tenue text-muted",
+    success: "border-line bg-tenue text-text",
+    warning: "border-warning/40 bg-warning/15 text-text",
+    danger: "border-lamp-red/30 bg-lamp-red/10 text-text",
+    info: "border-line bg-tenue text-text",
   };
   return (
-    <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium capitalize ${tones[tone]}`}>
+    <span className={`inline-flex items-center gap-1.5 rounded border px-1.5 py-0.5 font-mono text-[10px] font-medium tracking-wide uppercase ${tones[tone]}`}>
       {children}
     </span>
   );
@@ -67,7 +67,7 @@ export function Avatar({ name, size = "md" }: { name: string; size?: "sm" | "md"
   return (
     <span
       aria-hidden
-      className={`flex ${box} shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-secondary/80 to-primary/70 font-semibold text-white shadow-lg`}
+      className={`flex ${box} shrink-0 items-center justify-center rounded-lg bg-mask font-mono text-[11px] font-medium text-tenue`}
     >
       {initials}
     </span>
@@ -78,7 +78,7 @@ export function RowLink({ href, children }: { href: string; children: React.Reac
   return (
     <Link
       href={href}
-      className="group flex items-center justify-between gap-4 rounded-2xl border border-transparent px-4 py-3.5 transition-all duration-150 ease-out hover:border-white/10 hover:bg-white/[0.04] active:scale-[0.99]"
+      className="group flex items-center justify-between gap-4 rounded-lg border border-transparent px-3 py-3 transition-colors duration-200 ease-out hover:border-line hover:bg-tenue active:scale-[0.98]"
     >
       <span className="flex min-w-0 flex-1 items-center gap-3">{children}</span>
       <ChevronRight size={16} className="shrink-0 text-muted transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-text" />
@@ -99,15 +99,15 @@ export function StatCard({
 }) {
   const body = (
     <>
-      <span className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-primary">
+      <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-tenue text-mask">
         <Icon size={17} />
       </span>
-      <span className="mt-4 block text-xs font-medium tracking-[0.12em] text-muted uppercase">{label}</span>
-      <span className="mt-1 block text-[2rem] leading-none font-semibold tracking-tight tabular-nums">{value}</span>
+      <span className="mt-4 block font-mono text-[11px] tracking-[0.12em] text-muted uppercase">{label}</span>
+      <span className="mt-1 block font-mono text-[2rem] leading-none font-medium tracking-tight">{value}</span>
     </>
   );
   const cls =
-    "fi-rise block rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.055] to-white/[0.015] p-5 shadow-[0_12px_32px_-16px_rgb(0_0_0/0.6)] transition-all duration-150 ease-out hover:border-white/20 hover:bg-white/[0.05] active:scale-[0.98]";
+    "fi-rise block rounded-xl border border-line bg-surface p-5 transition-colors duration-200 ease-out hover:bg-tenue active:scale-[0.98]";
   return href ? (
     <Link href={href} className={cls}>
       {body}
@@ -119,10 +119,10 @@ export function StatCard({
 
 export function ScorePill({ left, right }: { left: number; right: number }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-black/40 px-3.5 py-1.5 text-lg font-semibold tracking-tight tabular-nums">
-      {left}
-      <span className="text-xs font-medium text-muted">–</span>
-      {right}
+    <span className="inline-flex items-center gap-2 rounded-lg border border-line bg-surface px-3 py-1 font-mono text-lg font-medium">
+      <span className="text-lamp-red"><span className="sr-only">Left </span>{left}</span>
+      <span className="text-xs text-muted">:</span>
+      <span className="text-lamp-green"><span className="sr-only">Right </span>{right}</span>
     </span>
   );
 }

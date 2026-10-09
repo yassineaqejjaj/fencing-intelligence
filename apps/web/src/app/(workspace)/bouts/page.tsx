@@ -53,7 +53,7 @@ export default function BoutsPage() {
       </Card>
       {bouts.data?.items.length ? (
         <Card className="!p-2">
-          <ul className="divide-y divide-white/[0.07]">
+          <ul className="divide-y divide-line">
             {bouts.data.items.map((bout) => (
               <li key={bout.id}>
                 <RowLink href={`/bouts/${bout.id}`}>

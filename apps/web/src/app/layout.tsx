@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo" });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   title: "Fencing Intelligence",
-  description: "Open-source fencing video analysis for athletes, coaches, and clubs.",
+  description: "Video analysis for fencing salles. Épée, foil, and sabre. Every sentence shows the validated count behind it.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} h-full`}>
+    <html lang="en" className={`${archivo.variable} ${mono.variable} h-full`}>
       <body className="min-h-full antialiased">
         <Providers>{children}</Providers>
       </body>

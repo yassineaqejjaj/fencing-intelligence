@@ -121,7 +121,7 @@ export function AnalysisTools({
           <button type="button" className={secondaryButton} onClick={() => run("scoreboard")}>Check scoreboard lights</button>
         </div>
         {reading ? (
-          <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
+          <div className="rounded-2xl border border-line bg-black/30 p-4">
             <p className="text-sm font-semibold">{reading.title}</p>
             <ul className="mt-2 grid gap-1.5 text-sm leading-relaxed text-muted">
               {reading.lines.map((line) => <li key={line}>{line}</li>)}

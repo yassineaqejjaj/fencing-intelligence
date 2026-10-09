@@ -89,13 +89,13 @@ export default function CompetitionPage() {
             <input className={inputClass} name="seed" type="number" min={0} placeholder="Seed" />
             <button className={secondaryButton} type="submit">Enter</button>
           </form>
-          <ul className="divide-y divide-white/[0.07]">
+          <ul className="divide-y divide-line">
             {(entries.data?.items ?? []).map((entry) => (
               <li key={entry.athlete_id} className="flex items-center justify-between gap-3 py-2.5 text-sm">
                 <span className="font-medium">{entry.display_name} <span className="text-muted">· seed {entry.seed}</span></span>
                 <button
                   type="button"
-                  className="rounded-full px-3 py-1 text-xs text-muted hover:bg-white/[0.06] hover:text-text"
+                  className="rounded-full px-3 py-1 text-xs text-muted hover:bg-surface hover:text-text"
                   onClick={() => void act(() => api(`/competitions/${id}/entries/${entry.athlete_id}`, { method: "DELETE" }), "Entry withdrawn.")}
                 >
                   Withdraw
@@ -148,7 +148,7 @@ export default function CompetitionPage() {
               </thead>
               <tbody className="tabular-nums">
                 {table.data?.items.map((row, index) => (
-                  <tr key={row.athlete_id} className="border-t border-white/[0.07]">
+                  <tr key={row.athlete_id} className="border-t border-line">
                     <td className="py-2.5 pr-4 text-muted">{index + 1}</td>
                     <td className="py-2.5 pr-4 font-medium">{row.display_name}</td>
                     <td className="py-2.5 pr-4 text-right">{row.bouts}</td>
@@ -227,7 +227,7 @@ function BoutRow({
     }
   };
   return (
-    <li className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/[0.07] bg-black/30 px-4 py-3">
+    <li className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-line bg-surface px-4 py-3">
       <div className="min-w-0">
         <p className="truncate text-sm font-medium">
           {bout.left ? names.get(bout.left.athlete_id) ?? "Left" : <span className="text-muted">Bye</span>}

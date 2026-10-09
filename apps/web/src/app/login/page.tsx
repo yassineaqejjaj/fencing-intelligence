@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Zap } from "lucide-react";
 import { ApiError, api } from "@/lib/api";
 import { buttonClass, Field, inputClass } from "@/components/states";
 
@@ -17,22 +16,20 @@ export default function LoginPage() {
   return (
     <main className="mx-auto grid min-h-screen max-w-5xl items-center gap-8 px-6 py-12 lg:grid-cols-[1.1fr_1fr]">
       <div className="fi-rise hidden lg:block">
-        <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary text-[#04121a]">
-          <Zap size={20} strokeWidth={2.5} />
-        </span>
+        <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-mask font-mono text-xs text-voyant">FI</span>
         <h1 className="mt-6 max-w-md text-5xl font-semibold tracking-tight text-balance">
           Read the bout like you were still on the piste.
         </h1>
         <p className="mt-4 max-w-md leading-relaxed text-muted">
           Slow the phrase, mark the action, validate the touch. Then the reading speaks in language a fencer can use — never a number invented by a model.
         </p>
-        <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm">
+        <div className="mt-8 rounded-3xl border border-line bg-surface p-5 text-sm">
           <p className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">Demo club</p>
           <p className="mt-2 text-muted">Invented fencers and bouts. Not a real season.</p>
           <p className="mt-1 font-mono text-[13px]">demo@example.com · DemoFence2026</p>
         </div>
       </div>
-      <div className="fi-rise mx-auto w-full max-w-md rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-7 shadow-[0_24px_64px_-24px_rgb(0_0_0/0.7)]">
+      <div className="fi-rise mx-auto w-full max-w-md rounded-3xl border border-line bg-gradient-to-b from-surface to-surface p-7 shadow-[var(--shadow-float)]">
         <h1 className="mt-1 text-3xl font-semibold tracking-tight">Sign in</h1>
         <p className="mt-2 text-sm text-muted lg:hidden">Demo: demo@example.com · DemoFence2026</p>
         <form

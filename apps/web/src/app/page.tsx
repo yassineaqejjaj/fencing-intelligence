@@ -1,95 +1,108 @@
 "use client";
 
 import Link from "next/link";
-import { ChartLine, Clapperboard, ShieldCheck, Sparkles } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
 const COPY = {
   en: {
+    features: "Features",
+    how: "How it works",
+    clubs: "For clubs",
+    data: "Data",
     signIn: "Sign in",
-    register: "Create account",
-    eyebrow: "Épée · Foil · Sabre",
-    title: "Read a bout from the marks a person validated.",
-    lede: "Fencing Intelligence is a video notebook for a salle. You upload the bout, mark what happened, and keep only what someone confirmed. The reading, the season, and the drills are built from those records.",
-    openDemo: "Open the demo club",
-    create: "Create your club",
-    demoNote: "Invented fencers. Not a real season.",
-    stepsTitle: "From the picture to a sentence",
+    tryDemo: "Try the demo",
+    kicker: "En garde — ready? Fence!",
+    title: "Every touch, explained.",
+    lede: "Upload a bout. Fencing Intelligence ties actions to the touches a person validated, then says in plain language what scores — and what does not.",
+    import: "Upload a bout",
+    seeDemo: "See the demo",
+    demoFine: "Demo without an account form · invented demonstration data",
+    weaponsTitle: "Built around the rules of each weapon",
+    epee: "Épée — the whole body",
+    foil: "Foil — priority, the torso",
+    sabre: "Sabre — priority, above the waist",
+    featuresTitle: "What the coach sees, counted.",
+    featuresLede: "From the raw video to the lesson plan, every screen rests on touches you validated.",
+    featureItems: [
+      { title: "Frame-by-frame video", body: "Each phrase is cut, named, and placed on a strip. A click returns you to that frame." },
+      { title: "Today’s reading", body: "Plain sentences. Each one shows the numbers that carry it. Nothing is invented." },
+      { title: "Athletes", body: "A profile per weapon and hand, bout after bout, with the coach’s notes." },
+      { title: "Poules and tableaux", body: "Enter a poule or a direct-elimination tableau and find each filmed bout." },
+      { title: "Private by default", body: "Video and data stay in your club. You decide who sees what, athlete by athlete." },
+    ],
+    howTitle: "From the video to the lesson.",
     steps: [
-      { title: "Upload the bout", body: "The video stays private to the club. Playback uses a short-lived link." },
-      { title: "Mark and validate", body: "Actions, touches, and targets. A machine hint stays a draft until a person confirms it." },
-      { title: "Read the bout", body: "Strengths and weaknesses for each fencer: runs, targets, the action that landed, the action that missed." },
-      { title: "Train from the count", body: "Drills come from the exercise library and the validated numbers. Nothing is invented to fill a gap." },
+      { kicker: "En garde", title: "Upload the bout", body: "A video from a phone or the salle camera. Name the weapon and the two fencers." },
+      { kicker: "Ready?", title: "Validate the touches", body: "A check may propose an action. The coach confirms or corrects it. Only validated touches count." },
+      { kicker: "Fence!", title: "Read and train", body: "Strengths, actions to work, and a drill from the library. The next lesson is ready." },
     ],
-    readsTitle: "What the tool will and will not say",
-    reads: [
-      { title: "One bout", body: "Score rebuilt from validated touches, then the patterns of that fight only. A rate under the minimum stays a fraction of this bout, not a habit." },
-      { title: "A season", body: "Wins, losses, comebacks, and where touches land — once there are enough validated samples. An empty chart stays empty." },
-      { title: "A competition", body: "Poules, indicator, and direct elimination. A bye is a bye. A tied elimination bout does not pick a winner." },
-      { title: "Three weapons", body: "Épée, foil, and sabre stay separate. A foil phrase is not mixed into an épée season." },
+    whoTitle: "Coaches, clubs, athletes.",
+    who: [
+      { title: "Coach", body: "Prepare the individual lesson from the week’s bouts." },
+      { title: "Club", body: "Keep videos, competitions, and reports in one salle." },
+      { title: "Athlete", body: "Rewatch your touches and follow the objective between competitions." },
     ],
-    honestTitle: "The limits are part of the product",
-    honest: [
-      "A scoreboard light is a candidate, not a referee decision.",
-      "Pose and movement checks are experimental. They do not claim to recognize a fencing action.",
-      "The same action is never both a strength and a weakness.",
-      "Olympic-level trust is the standard we build toward. Approval is not claimed.",
-    ],
-    scenariosTitle: "What the demo club contains",
-    scenariosLede: "Sign in as the demo coach and walk these invented situations. Every name is fictional.",
-    scenarios: [
-      { title: "Open de Lyon", body: "Six épée fencers, a full poule, standings by victories then indicator, and quarter-finals with a bye and a 15–8." },
-      { title: "A season with a dip", body: "Inès Morel wins, loses, and comes back from two touches down. The reading names the run and the target, not a mood." },
-      { title: "Foil and sabre", body: "Chloé Nguyen and Camille Rossi on foil. Kenji Sato and Sami Elbaz on sabre. Each weapon keeps its own bouts." },
-      { title: "A minor", body: "Hugo Keller is under 18. The club holds a guardian consent record before his video can be used." },
-      { title: "A bout, both sides", body: "Each completed fight has a sheet of validated actions: one action that scored, one that did not, for each fencer." },
-      { title: "The coach’s next hour", body: "Training sessions, an assigned parry-riposte drill, and a PDF reading of the invented Open." },
-    ],
-    ctaTitle: "Walk the club before you bring your own video.",
-    ctaBody: "The demo password is public because the fencers are not real. Your club’s videos stay in your organization.",
+    principle: "Our principle",
+    principleBody: "Every sentence on screen shows the numbers that carry it.",
+    sampleKicker: "To work · enough of a sample",
+    sampleTitle: "An action that rarely scores",
+    sampleBody: "Attack: 0 successes out of 5 in this bout. Finish it, or choose it less often.",
+    ctaTitle: "Your next bout deserves a real reading.",
+    ctaBody: "Open the demo: an invented club, a full épée poule, foil and sabre bouts, already marked.",
+    openDemo: "Open the demo",
+    footer: "Video analysis for fencing salles. Épée, foil, and sabre.",
+    privacy: "Privacy",
+    code: "Source",
   },
   fr: {
-    signIn: "Connexion",
-    register: "Créer un compte",
-    eyebrow: "Épée · Fleuret · Sabre",
-    title: "Lire un combat à partir des marques qu’une personne a validées.",
-    lede: "Fencing Intelligence est le carnet vidéo d’une salle. On importe le combat, on marque ce qui s’est passé, et on ne garde que ce qu’une personne a confirmé. La lecture, la saison et les exercices sortent de ces enregistrements.",
-    openDemo: "Ouvrir le club démo",
-    create: "Créer votre salle",
-    demoNote: "Tireurs inventés. Pas une saison réelle.",
-    stepsTitle: "De l’image à une phrase",
+    features: "Fonctionnalités",
+    how: "Comment ça marche",
+    clubs: "Pour les clubs",
+    data: "Données",
+    signIn: "Se connecter",
+    tryDemo: "Essayer la démo",
+    kicker: "En garde — prêts ? Allez !",
+    title: "Chaque touche, expliquée.",
+    lede: "Importez une vidéo d’assaut. Fencing Intelligence relie les actions aux touches qu’une personne a validées, et dit en clair ce qui marque — et ce qui ne marque pas.",
+    import: "Importer un assaut",
+    seeDemo: "Voir la démo",
+    demoFine: "Démo sans inscription · données de démonstration fictives",
+    weaponsTitle: "Conçu avec les règles de chaque arme",
+    epee: "Épée — corps entier",
+    foil: "Fleuret — priorité, tronc",
+    sabre: "Sabre — priorité, au-dessus de la taille",
+    featuresTitle: "Ce que le maître voit, chiffré.",
+    featuresLede: "De la vidéo brute au plan d’entraînement, chaque écran s’appuie sur des touches que vous avez validées.",
+    featureItems: [
+      { title: "Analyse vidéo image par image", body: "Chaque phrase d’armes est découpée, nommée et placée sur une frise. Un clic vous ramène à l’image." },
+      { title: "Lecture du jour", body: "Des phrases en langage simple. Chacune affiche les chiffres qui la portent. Rien n’est inventé." },
+      { title: "Suivi des athlètes", body: "Profil par arme et par main, progression assaut après assaut, notes du maître." },
+      { title: "Poules et tableaux", body: "Saisissez une poule ou un tableau d’élimination directe et retrouvez chaque match filmé." },
+      { title: "Privé par défaut", body: "Vidéos et données restent dans votre club. Vous décidez qui voit quoi, athlète par athlète." },
+    ],
+    howTitle: "De la vidéo à la leçon.",
     steps: [
-      { title: "Importer le combat", body: "La vidéo reste privée à la salle. La lecture passe par un lien de courte durée." },
-      { title: "Marquer et valider", body: "Actions, touches et cibles. Une suggestion de la machine reste un brouillon tant qu’une personne ne l’a pas confirmée." },
-      { title: "Lire le combat", body: "Points forts et points faibles de chaque tireur : séries, zones, l’action qui a marqué, celle qui a manqué." },
-      { title: "Entraîner sur le compte", body: "Les exercices viennent de la bibliothèque et des chiffres validés. Rien n’est inventé pour combler un trou." },
+      { kicker: "En garde", title: "Importez l’assaut", body: "Une vidéo depuis votre téléphone ou la caméra de la salle. Indiquez l’arme et les deux tireurs." },
+      { kicker: "Prêts ?", title: "Validez les touches", body: "Un contrôle peut proposer une action. Le maître confirme ou corrige. Seules les touches validées comptent." },
+      { kicker: "Allez !", title: "Lisez et entraînez", body: "Points forts, actions à travailler, exercice proposé : la prochaine leçon est prête." },
     ],
-    readsTitle: "Ce que l’outil dit, et ce qu’il se refuse à dire",
-    reads: [
-      { title: "Un combat", body: "Le score est reconstruit sur les touches validées, puis les motifs de ce seul assaut. Sous le minimum d’essais, un taux reste une fraction de ce combat, pas une habitude." },
-      { title: "Une saison", body: "Victoires, défaites, retours, et où les touches arrivent — dès qu’il y a assez d’échantillons validés. Un graphique vide reste vide." },
-      { title: "Une compétition", body: "Poules, indicateur, et élimination directe. Un exempt est un exempt. Un match nul en tableau ne désigne pas de vainqueur." },
-      { title: "Trois armes", body: "Épée, fleuret et sabre restent séparés. Une phrase de fleuret n’entre pas dans une saison d’épée." },
+    whoTitle: "Maîtres, clubs, athlètes.",
+    who: [
+      { title: "Maître d’armes", body: "Préparez la leçon individuelle à partir des assauts de la semaine." },
+      { title: "Club", body: "Centralisez vidéos, compétitions et rapports pour toute la salle." },
+      { title: "Athlète", body: "Revoyez vos touches et suivez vos objectifs entre deux compétitions." },
     ],
-    honestTitle: "Les limites font partie du produit",
-    honest: [
-      "Une lampe de tableau est une candidate, pas une décision d’arbitre.",
-      "Les contrôles de pose et de déplacement sont expérimentaux. Ils ne prétendent pas reconnaître une action d’escrime.",
-      "La même action n’est jamais à la fois un point fort et un point faible.",
-      "La confiance du niveau olympique est le niveau visé. Une approbation n’est pas revendiquée.",
-    ],
-    scenariosTitle: "Ce que contient le club démo",
-    scenariosLede: "Connectez-vous comme le maître démo et parcourez ces situations inventées. Tous les noms sont fictifs.",
-    scenarios: [
-      { title: "Open de Lyon", body: "Six épéistes, une poule complète, un classement aux victoires puis à l’indicateur, et des quarts avec un exempt et un 15–8." },
-      { title: "Une saison avec un creux", body: "Inès Morel gagne, perd, et revient après deux touches de retard. La lecture nomme la série et la zone, pas une humeur." },
-      { title: "Fleuret et sabre", body: "Chloé Nguyen et Camille Rossi au fleuret. Kenji Sato et Sami Elbaz au sabre. Chaque arme garde ses assauts." },
-      { title: "Un mineur", body: "Hugo Keller a moins de 18 ans. La salle conserve un consentement du responsable légal avant d’utiliser sa vidéo." },
-      { title: "Un combat, des deux côtés", body: "Chaque assaut terminé a une fiche d’actions validées : une action qui a marqué, une qui n’a pas marqué, pour chaque tireur." },
-      { title: "L’heure suivante du maître", body: "Des séances, un exercice de parade-riposte assigné, et un PDF de lecture de l’Open inventé." },
-    ],
-    ctaTitle: "Parcourez la salle avant d’apporter votre vidéo.",
-    ctaBody: "Le mot de passe démo est public parce que les tireurs ne sont pas réels. Les vidéos de votre salle restent dans votre organisation.",
+    principle: "Notre principe",
+    principleBody: "Chaque phrase affichée montre les chiffres qui la portent.",
+    sampleKicker: "À travailler · échantillon du combat",
+    sampleTitle: "Une action qui marque peu",
+    sampleBody: "Attaque : 0 réussite sur 5 dans ce combat. Travaillez la conclusion, ou choisissez-la moins souvent.",
+    ctaTitle: "Votre prochain assaut mérite une vraie lecture.",
+    ctaBody: "Ouvrez la démo : un club inventé, une poule d’épée complète, du fleuret et du sabre, déjà marqués.",
+    openDemo: "Ouvrir la démo",
+    footer: "L’analyse vidéo pour les salles d’armes. Épée, fleuret et sabre.",
+    privacy: "Confidentialité",
+    code: "Code",
   },
 } as const;
 
@@ -97,115 +110,157 @@ export default function HomePage() {
   const { locale, setLocale } = useI18n();
   const copy = COPY[locale];
   return (
-    <main className="relative mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-8">
-      <header className="flex items-center justify-between gap-4">
-        <p className="text-sm font-semibold tracking-tight">Fencing Intelligence</p>
+    <div className="min-h-screen bg-tenue text-mask">
+      <header className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-5">
+        <p className="text-sm font-bold tracking-tight uppercase">Fencing Intelligence</p>
+        <nav className="hidden items-center gap-5 text-sm text-muted md:flex">
+          <a href="#features" className="hover:text-mask">{copy.features}</a>
+          <a href="#how" className="hover:text-mask">{copy.how}</a>
+          <a href="#clubs" className="hover:text-mask">{copy.clubs}</a>
+          <a href="#data" className="hover:text-mask">{copy.data}</a>
+        </nav>
         <div className="flex items-center gap-2">
-          <div className="flex rounded-full border border-white/10 p-0.5 text-xs font-semibold">
-            <button type="button" className={`rounded-full px-2.5 py-1 ${locale === "fr" ? "bg-white/10 text-text" : "text-muted"}`} onClick={() => setLocale("fr")}>
-              FR
-            </button>
-            <button type="button" className={`rounded-full px-2.5 py-1 ${locale === "en" ? "bg-white/10 text-text" : "text-muted"}`} onClick={() => setLocale("en")}>
-              EN
-            </button>
+          <div className="flex rounded border border-line bg-surface p-0.5 font-mono text-[11px]">
+            <button type="button" className={`rounded px-2 py-1 ${locale === "fr" ? "bg-mask text-tenue" : "text-muted"}`} onClick={() => setLocale("fr")}>FR</button>
+            <button type="button" className={`rounded px-2 py-1 ${locale === "en" ? "bg-mask text-tenue" : "text-muted"}`} onClick={() => setLocale("en")}>EN</button>
           </div>
-          <Link href="/login" className="rounded-full px-4 py-2 text-sm text-muted transition-colors hover:text-text active:scale-[0.97]">
-            {copy.signIn}
-          </Link>
-          <Link href="/register" className="rounded-full bg-gradient-to-r from-primary to-[#5eead4] px-4 py-2 text-sm font-semibold text-[#04121a] active:scale-[0.97]">
-            {copy.register}
-          </Link>
+          <Link href="/login" className="px-3 py-2 text-sm text-muted hover:text-mask">{copy.signIn}</Link>
+          <Link href="/login" className="fi-btn bg-mask px-4 py-2 text-sm font-semibold text-tenue">{copy.tryDemo}</Link>
         </div>
       </header>
 
-      <section className="fi-rise grid gap-8 py-16 lg:grid-cols-[1.3fr_0.7fr] lg:items-end">
-        <div>
-          <p className="inline-flex w-fit rounded-full border border-white/10 bg-white/[0.05] px-3.5 py-1.5 text-[11px] font-semibold tracking-[0.18em] text-primary uppercase">
-            {copy.eyebrow}
-          </p>
-          <h1 className="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-balance md:text-6xl">{copy.title}</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">{copy.lede}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/login" className="rounded-full bg-gradient-to-r from-primary to-[#5eead4] px-6 py-3.5 text-sm font-semibold text-[#04121a] active:scale-[0.97]">
-              {copy.openDemo}
-            </Link>
-            <Link href="/register" className="rounded-full border border-white/10 bg-white/[0.06] px-6 py-3.5 text-sm font-medium hover:bg-white/[0.1] active:scale-[0.97]">
-              {copy.create}
-            </Link>
+      <main className="mx-auto grid max-w-6xl gap-20 px-6 pt-12 pb-20">
+        <section className="grid items-end gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+          <div>
+            <p className="font-mono text-[12px] tracking-[0.16em] text-muted uppercase">{copy.kicker}</p>
+            <h1 className="mt-4 max-w-3xl text-5xl text-balance md:text-7xl">{copy.title}</h1>
+            <p className="mt-6 max-w-xl text-muted">{copy.lede}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/register" className="fi-btn bg-mask px-5 py-3 text-sm font-semibold text-tenue">{copy.import}</Link>
+              <Link href="/login" className="fi-btn border border-line bg-surface px-5 py-3 text-sm font-semibold">{copy.seeDemo}</Link>
+            </div>
+            <p className="mt-4 font-mono text-[12px] text-muted">{copy.demoFine}</p>
+          </div>
+          <aside className="rounded-2xl bg-mask p-6 text-tenue shadow-[var(--shadow-float)]">
+            <div className="flex items-end justify-between gap-4">
+              <p className="font-mono text-sm">
+                <span className="text-lamp-red">K. Sato</span>
+                <span className="mx-2 text-2xl">4:2</span>
+                <span className="text-lamp-green">S. Elbaz</span>
+              </p>
+              <p className="font-mono text-[11px] tracking-wider text-tenue/70">SABRE · 02:14</p>
+            </div>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-lg bg-white/5 p-4">
+                <p className="font-mono text-[10px] tracking-[0.14em] text-voyant">POINT FORT</p>
+                <p className="mt-2 font-mono text-lg">Riposte · 5/5</p>
+              </div>
+              <div className="rounded-lg bg-white/5 p-4">
+                <p className="font-mono text-[10px] tracking-[0.14em] text-warning">À TRAVAILLER</p>
+                <p className="mt-2 font-mono text-lg">Attaque · 0/5</p>
+              </div>
+            </div>
+            <p className="mt-4 text-xs text-tenue/60">{locale === "fr" ? "Exemple de lecture. Les noms sont fictifs. Rouge = gauche, vert = droite." : "A sample reading. The names are fictional. Red = left, green = right."}</p>
+          </aside>
+        </section>
+
+        <section aria-label={copy.weaponsTitle} className="grid gap-3 border-y border-line py-6 md:grid-cols-3">
+          {[
+            ["É", copy.epee],
+            ["F", copy.foil],
+            ["S", copy.sabre],
+          ].map(([mark, label]) => (
+            <p key={mark} className="flex items-center gap-3 text-sm">
+              <span className="flex h-7 w-7 items-center justify-center rounded border border-line bg-surface font-mono text-xs">{mark}</span>
+              {label}
+            </p>
+          ))}
+        </section>
+
+        <section id="features" className="grid gap-8">
+          <div>
+            <p className="font-mono text-[12px] tracking-[0.16em] text-muted">01 — {copy.features}</p>
+            <h2 className="mt-2 max-w-xl text-4xl">{copy.featuresTitle}</h2>
+            <p className="mt-3 max-w-2xl text-muted">{copy.featuresLede}</p>
+          </div>
+          <div className="grid gap-3 md:grid-cols-2">
+            {copy.featureItems.map((item) => (
+              <article key={item.title} className="rounded-xl border border-line bg-surface p-6">
+                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <p className="mt-2 text-sm text-muted">{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="how" className="grid gap-8">
+          <div>
+            <p className="font-mono text-[12px] tracking-[0.16em] text-muted">02 — {copy.how}</p>
+            <h2 className="mt-2 text-4xl">{copy.howTitle}</h2>
+          </div>
+          <ol className="grid gap-3 md:grid-cols-3">
+            {copy.steps.map((step) => (
+              <li key={step.title} className="rounded-xl border border-line bg-surface p-6">
+                <p className="font-mono text-[12px] tracking-[0.14em] text-muted uppercase">{step.kicker}</p>
+                <h3 className="mt-3 text-xl font-semibold">{step.title}</h3>
+                <p className="mt-2 text-sm text-muted">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section id="clubs" className="grid gap-8 lg:grid-cols-[1fr_1fr]">
+          <div>
+            <p className="font-mono text-[12px] tracking-[0.16em] text-muted">03 — {copy.clubs}</p>
+            <h2 className="mt-2 text-4xl">{copy.whoTitle}</h2>
+            <ul className="mt-6 grid gap-4">
+              {copy.who.map((item) => (
+                <li key={item.title}>
+                  <p className="font-semibold">{item.title}</p>
+                  <p className="text-sm text-muted">{item.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <aside id="data" className="rounded-2xl bg-mask p-7 text-tenue">
+            <p className="font-mono text-[11px] tracking-[0.16em] text-voyant uppercase">{copy.principle}</p>
+            <p className="mt-4 text-2xl leading-snug font-semibold uppercase" style={{ fontStretch: "112%" }}>{copy.principleBody}</p>
+            <div className="mt-8 rounded-xl bg-white/5 p-5">
+              <p className="font-mono text-[10px] tracking-[0.14em] text-warning">{copy.sampleKicker}</p>
+              <h3 className="mt-2 text-lg font-semibold normal-case">{copy.sampleTitle}</h3>
+              <p className="mt-2 text-sm text-tenue/80">{copy.sampleBody}</p>
+              <p className="mt-3 font-mono text-xs text-tenue/60">réussite 0/5 · attaque</p>
+            </div>
+          </aside>
+        </section>
+
+        <section className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-line bg-surface p-8 md:flex-row md:items-end">
+          <div>
+            <h2 className="max-w-xl text-4xl">{copy.ctaTitle}</h2>
+            <p className="mt-3 max-w-xl text-muted">{copy.ctaBody}</p>
+            <p className="mt-3 font-mono text-sm">demo@example.com · DemoFence2026</p>
+          </div>
+          <Link href="/login" className="fi-btn bg-mask px-5 py-3 text-sm font-semibold text-tenue">{copy.openDemo}</Link>
+        </section>
+      </main>
+
+      <footer className="border-t border-line">
+        <div className="mx-auto grid max-w-6xl gap-6 px-6 py-10 text-sm md:grid-cols-[1.4fr_1fr_1fr]">
+          <div>
+            <p className="font-bold tracking-tight uppercase">Fencing Intelligence</p>
+            <p className="mt-2 max-w-sm text-muted">{copy.footer}</p>
+          </div>
+          <div className="grid content-start gap-2">
+            <a href="#features" className="text-muted hover:text-mask">{copy.features}</a>
+            <a href="#how" className="text-muted hover:text-mask">{copy.how}</a>
+            <Link href="/login" className="text-muted hover:text-mask">{copy.tryDemo}</Link>
+          </div>
+          <div className="grid content-start gap-2">
+            <Link href="/privacy" className="text-muted hover:text-mask">{copy.privacy}</Link>
+            <a href="https://github.com/yassineaqejjaj/fencing-intelligence" className="text-muted hover:text-mask">{copy.code}</a>
           </div>
         </div>
-        <aside className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-          <p className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">{locale === "fr" ? "Club démo" : "Demo club"}</p>
-          <p className="mt-3 font-mono text-sm">demo@example.com</p>
-          <p className="font-mono text-sm">DemoFence2026</p>
-          <p className="mt-3 text-sm leading-relaxed text-muted">{copy.demoNote}</p>
-        </aside>
-      </section>
-
-      <section className="grid gap-4 pb-16">
-        <h2 className="text-2xl font-semibold">{copy.stepsTitle}</h2>
-        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {copy.steps.map((step, index) => {
-            const Icon = [Clapperboard, ShieldCheck, Sparkles, ChartLine][index];
-            return (
-              <li key={step.title} className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.055] to-white/[0.015] p-6">
-                <Icon size={20} className="text-primary" />
-                <p className="mt-4 text-xs font-semibold tracking-[0.16em] text-muted uppercase">0{index + 1}</p>
-                <h3 className="mt-1 text-lg font-semibold">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{step.body}</p>
-              </li>
-            );
-          })}
-        </ol>
-      </section>
-
-      <section className="grid gap-4 pb-16">
-        <h2 className="text-2xl font-semibold">{copy.readsTitle}</h2>
-        <div className="grid gap-3 md:grid-cols-2">
-          {copy.reads.map((item) => (
-            <article key={item.title} className="rounded-3xl border border-white/10 p-6">
-              <h3 className="text-lg font-semibold">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{item.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="grid gap-4 pb-16 lg:grid-cols-[0.8fr_1.2fr]">
-        <h2 className="text-2xl font-semibold">{copy.honestTitle}</h2>
-        <ul className="grid gap-3">
-          {copy.honest.map((line) => (
-            <li key={line} className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 text-sm leading-relaxed">
-              {line}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="grid gap-4 pb-16">
-        <div>
-          <h2 className="text-2xl font-semibold">{copy.scenariosTitle}</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">{copy.scenariosLede}</p>
-        </div>
-        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-          {copy.scenarios.map((item) => (
-            <article key={item.title} className="rounded-3xl border border-white/10 p-6">
-              <h3 className="font-semibold">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{item.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="mb-10 flex flex-col gap-4 rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent p-8 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h2 className="max-w-xl text-2xl font-semibold text-balance">{copy.ctaTitle}</h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">{copy.ctaBody}</p>
-        </div>
-        <Link href="/login" className="w-fit rounded-full bg-gradient-to-r from-primary to-[#5eead4] px-6 py-3.5 text-sm font-semibold text-[#04121a] active:scale-[0.97]">
-          {copy.openDemo}
-        </Link>
-      </section>
-    </main>
+      </footer>
+    </div>
   );
 }

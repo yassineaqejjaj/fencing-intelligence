@@ -60,7 +60,7 @@ export default function CoachPage() {
         {recommendations.data?.items.map((item, index) => (
           <li
             key={item.evidence.metric}
-            className="fi-rise rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.055] to-white/[0.015] p-6"
+            className="fi-rise rounded-3xl border border-line bg-gradient-to-b from-surface to-surface p-6"
             style={{ animationDelay: `${index * 70}ms` }}
           >
             <p className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.16em] text-primary uppercase">
@@ -72,21 +72,21 @@ export default function CoachPage() {
                 <span className="font-mono">{item.evidence.metric}</span>
                 <span className="tabular-nums">{(item.evidence.value * 100).toFixed(1)}% · {item.evidence.denominator} samples</span>
               </div>
-              <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-white/10">
+              <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-tenue">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-primary to-secondary"
+                  className="h-full rounded-full bg-mask"
                   style={{ width: `${Math.round(item.evidence.value * 100)}%` }}
                 />
               </div>
             </div>
-            <div className="mt-5 rounded-2xl border border-white/10 bg-black/30 p-4">
+            <div className="mt-5 rounded-lg border border-line bg-tenue p-4">
               <p className="font-medium">{item.exercise.name_en}</p>
               <p className="mt-1 text-sm leading-relaxed text-muted">{item.exercise.description_en}</p>
             </div>
             {item.video_references.length ? (
               <Link
                 href={`/videos/${item.video_references[0].video_id}`}
-                className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-sm font-medium transition-colors hover:bg-white/[0.1]"
+                className="mt-4 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium transition-colors hover:bg-tenue"
               >
                 <Clapperboard size={15} className="text-primary" /> Open the bout clip
               </Link>

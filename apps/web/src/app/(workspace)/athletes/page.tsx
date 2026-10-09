@@ -76,7 +76,7 @@ export default function AthletesPage() {
           {athletes.data.items.map((athlete, index) => (
             <li key={athlete.id}>
               <RowLink href={`/athletes/${athlete.id}`}>
-                <span className="fi-rise flex flex-1 items-center gap-3 rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.055] to-white/[0.015] p-4" style={{ animationDelay: `${Math.min(index, 6) * 50}ms` }}>
+                <span className="fi-rise flex flex-1 items-center gap-3 rounded-3xl border border-line bg-gradient-to-b from-surface to-surface p-4" style={{ animationDelay: `${Math.min(index, 6) * 50}ms` }}>
                   <Avatar name={athlete.display_name} />
                   <span className="min-w-0">
                     <span className="block truncate font-medium">{athlete.display_name}</span>

@@ -20,7 +20,6 @@ import {
   Swords,
   Trophy,
   Users,
-  Zap,
 } from "lucide-react";
 import { api, type User } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
@@ -28,7 +27,7 @@ import { Loading } from "./states";
 
 const sections = [
   {
-    label: "Review",
+    label: "Analyse",
     links: [
       ["dashboard", "/dashboard", LayoutDashboard],
       ["videos", "/videos", Clapperboard],
@@ -37,7 +36,7 @@ const sections = [
     ],
   },
   {
-    label: "Insight",
+    label: "Lecture",
     links: [
       ["performance", "/performance", ChartLine],
       ["coach", "/coach", GraduationCap],
@@ -53,7 +52,7 @@ const sections = [
     ],
   },
   {
-    label: "System",
+    label: "Système",
     links: [
       ["datasets", "/datasets", Database],
       ["models", "/models", Cpu],
@@ -85,22 +84,18 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[264px_minmax(0,1fr)]">
-      <aside className="border-b border-white/10 bg-surface/70 backdrop-blur-2xl lg:sticky lg:top-0 lg:h-screen lg:border-r lg:border-b-0">
+      <aside className="border-b border-line bg-surface lg:sticky lg:top-0 lg:h-screen lg:border-r lg:border-b-0">
         <div className="flex items-center gap-3 px-5 pt-5 pb-2">
-          <Link href="/dashboard" className="flex items-center gap-3" aria-label={t.product}>
-            <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary text-[#04121a] shadow-[0_8px_32px_-8px_rgb(0_212_255/0.5)]">
-              <Zap size={18} strokeWidth={2.5} />
-            </span>
-            <span className="leading-tight">
-              <span className="block text-[13px] font-semibold tracking-tight">{t.product}</span>
-              <span className="block text-[11px] text-muted">{t.weapons}</span>
-            </span>
+          <Link href="/dashboard" className="leading-none" aria-label={t.product}>
+            <span className="block text-[15px] font-bold tracking-tight uppercase">Fencing</span>
+            <span className="block text-[15px] font-bold tracking-tight uppercase">Intelligence</span>
+            <span className="mt-1 block font-mono text-[10px] tracking-[0.14em] text-muted uppercase">{locale === "fr" ? "Salle d'armes" : "Salle"}</span>
           </Link>
         </div>
         <nav className="flex gap-5 overflow-x-auto px-4 pt-3 pb-4 lg:flex-col lg:gap-1 lg:overflow-visible" aria-label="Main">
           {sections.map((section) => (
             <div key={section.label} className="min-w-max lg:min-w-0">
-              <p className="hidden px-3 pt-3 pb-1.5 text-[10px] font-semibold tracking-[0.18em] text-muted/70 uppercase lg:block">
+              <p className="hidden px-3 pt-4 pb-1.5 font-mono text-[10px] tracking-[0.16em] text-muted uppercase lg:block">
                 {section.label}
               </p>
               <div className="flex gap-1 lg:flex-col">
@@ -111,13 +106,13 @@ export function Shell({ children }: { children: React.ReactNode }) {
                       key={href}
                       href={href}
                       aria-current={current ? "page" : undefined}
-                      className={`flex items-center gap-2.5 rounded-2xl px-3 py-2 text-sm transition-all duration-150 ease-out active:scale-[0.97] motion-reduce:transform-none ${
+                      className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors duration-200 ease-out active:scale-[0.98] motion-reduce:transform-none ${
                         current
-                          ? "border border-white/10 bg-white/[0.08] font-medium text-text shadow-sm"
-                          : "border border-transparent text-muted hover:bg-white/[0.04] hover:text-text"
+                          ? "bg-mask font-medium text-tenue"
+                          : "text-muted hover:bg-tenue hover:text-text"
                       }`}
                     >
-                      <Icon size={16} className={current ? "text-primary" : ""} />
+                      <Icon size={16} className={current ? "text-voyant" : ""} />
                       {t[key as keyof typeof t]}
                     </Link>
                   );
@@ -128,10 +123,10 @@ export function Shell({ children }: { children: React.ReactNode }) {
         </nav>
       </aside>
       <div className="min-w-0">
-        <header className="sticky top-0 z-10 border-b border-white/10 bg-background/70 backdrop-blur-2xl">
+        <header className="sticky top-0 z-10 border-b border-line bg-background/90 backdrop-blur-md">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:px-8">
             <div className="flex min-w-0 items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-secondary to-primary text-xs font-semibold text-white">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-mask font-mono text-[11px] font-medium text-tenue">
                 {initials}
               </span>
               <p className="truncate text-sm">
@@ -142,7 +137,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
             <div className="flex items-center gap-1.5">
               <button
                 type="button"
-                className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-xs font-semibold text-muted transition-colors hover:text-text active:scale-[0.97]"
+                className="rounded border border-line bg-surface px-2.5 py-1 font-mono text-[11px] text-muted hover:text-text active:scale-[0.98]"
                 onClick={() => setLocale(locale === "en" ? "fr" : "en")}
                 aria-label="Language"
               >
@@ -150,7 +145,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
               </button>
               <button
                 type="button"
-                className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-white/[0.06] hover:text-text active:scale-[0.97]"
+                className="flex items-center gap-1.5 rounded px-3 py-1.5 text-xs font-medium text-muted hover:bg-tenue hover:text-text active:scale-[0.98]"
                 onClick={async () => {
                   await api("/auth/logout", { method: "POST" });
                   router.push("/");
