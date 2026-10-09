@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     s3_secret_key: str = "fencingsecret"
     s3_bucket: str = "fencing-videos"
     s3_region: str = "us-east-1"
+    s3_addressing_style: str = "path"
     cookie_secure: bool = False
     session_days: int = 14
     max_upload_bytes: int = 2_000_000_000
