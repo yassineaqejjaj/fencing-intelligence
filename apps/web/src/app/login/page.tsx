@@ -11,9 +11,8 @@ export default function LoginPage() {
   const router = useRouter();
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
-  // Demo credentials exist only in local development seeds. Never advertise
-  // them on production builds (next start sets NODE_ENV=production).
-  const showDemoHint = process.env.NODE_ENV !== "production";
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <main className="mx-auto grid min-h-screen max-w-5xl items-center gap-8 px-6 py-12 lg:grid-cols-[1.1fr_1fr]">
@@ -27,18 +26,15 @@ export default function LoginPage() {
         <p className="mt-4 max-w-md leading-relaxed text-muted">
           Slow the phrase, mark the action, validate the touch. Then the reading speaks in language a fencer can use — never a number invented by a model.
         </p>
-        {showDemoHint ? (
-          <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm">
-            <p className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">Local demo</p>
-            <p className="mt-2 text-muted">The demo club is loaded for</p>
-            <p className="mt-1 font-mono text-[13px]">demo@example.com · DemoFence2026</p>
-          </div>
-        ) : null}
+        <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm">
+          <p className="text-xs font-semibold tracking-[0.16em] text-primary uppercase">Demo club</p>
+          <p className="mt-2 text-muted">Invented fencers and bouts. Not a real season.</p>
+          <p className="mt-1 font-mono text-[13px]">demo@example.com · DemoFence2026</p>
+        </div>
       </div>
       <div className="fi-rise mx-auto w-full max-w-md rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-7 shadow-[0_24px_64px_-24px_rgb(0_0_0/0.7)]">
-        {showDemoHint ? <p className="text-xs font-semibold tracking-[0.16em] text-primary uppercase lg:hidden">Local demo</p> : null}
         <h1 className="mt-1 text-3xl font-semibold tracking-tight">Sign in</h1>
-        {showDemoHint ? <p className="mt-2 text-sm text-muted lg:hidden">Demo: demo@example.com · DemoFence2026</p> : null}
+        <p className="mt-2 text-sm text-muted lg:hidden">Demo: demo@example.com · DemoFence2026</p>
         <form
           className="mt-6 flex flex-col gap-4"
           method="post"
@@ -62,11 +58,21 @@ export default function LoginPage() {
           }}
         >
           <Field label="Email">
-            <input className={inputClass} name="email" type="email" autoComplete="email" required />
+            <input className={inputClass} name="email" type="email" autoComplete="email" required value={email} onChange={(event) => setEmail(event.target.value)} />
           </Field>
           <Field label="Password">
-            <input className={inputClass} name="password" type="password" autoComplete="current-password" required />
+            <input className={inputClass} name="password" type="password" autoComplete="current-password" required value={password} onChange={(event) => setPassword(event.target.value)} />
           </Field>
+          <button
+            type="button"
+            className="text-left text-sm font-semibold text-primary hover:brightness-125"
+            onClick={() => {
+              setEmail("demo@example.com");
+              setPassword("DemoFence2026");
+            }}
+          >
+            Use the demo club
+          </button>
           {error ? <p role="alert" className="text-sm text-danger">{error}</p> : null}
           <button className={buttonClass} disabled={pending} type="submit">
             {pending ? "Signing in…" : "Sign in"}

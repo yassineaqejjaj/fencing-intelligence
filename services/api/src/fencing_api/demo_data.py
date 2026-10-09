@@ -49,7 +49,42 @@ NOTE = "Invented for the demo. Not a real bout."
 OPEN_NOTE = "Invented Open de Lyon. Not a real event."
 
 
+def ensure_demo_account(db: Session) -> None:
+    """Create the public demo coach and club when they are missing.
+
+    The password is the one printed on the landing page. The rows it unlocks
+    are invented. This is safe to run again.
+    """
+    from fencing_api.security import hash_password
+    from fencing_api.seed import seed as seed_catalog
+
+    user = db.scalar(select(User).where(User.email == "demo@example.com"))
+    if user is None:
+        user = User(
+            email="demo@example.com",
+            password_hash=hash_password("DemoFence2026"),
+            display_name="Demo Coach",
+            locale="fr",
+        )
+        db.add(user)
+        db.flush()
+    membership = db.scalar(select(OrganizationMembership).where(OrganizationMembership.user_id == user.id))
+    if membership is None:
+        slug = "salle-des-demos"
+        suffix = 2
+        while db.scalar(select(Organization.id).where(Organization.slug == slug)):
+            slug = f"salle-des-demos-{suffix}"
+            suffix += 1
+        club_org = Organization(name="Salle des démos", slug=slug)
+        db.add(club_org)
+        db.flush()
+        db.add(OrganizationMembership(organization_id=club_org.id, user_id=user.id, role="administrator"))
+        db.flush()
+    seed_catalog(db)
+
+
 def seed_demo(db: Session, sample_video: Path | None = None) -> str:
+    ensure_demo_account(db)
     user = db.scalar(select(User).where(User.email == "demo@example.com"))
     if user is None:
         raise RuntimeError("Sign-in account demo@example.com does not exist yet")
