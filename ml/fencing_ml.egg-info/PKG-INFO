@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: fencing-ml
+Version: 0.1.0
+Requires-Python: >=3.11
+Requires-Dist: fencing-domain
+Provides-Extra: scientific
+Requires-Dist: numpy>=2.1; extra == "scientific"
+Requires-Dist: scipy>=1.14; extra == "scientific"
+Requires-Dist: scikit-learn>=1.5; extra == "scientific"

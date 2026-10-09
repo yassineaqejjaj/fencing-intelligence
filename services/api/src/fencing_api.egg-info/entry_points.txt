@@ -1,0 +1,2 @@
+[console_scripts]
+datasets = fencing_api.cli:main

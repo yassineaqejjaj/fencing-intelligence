@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Start data services
+        run: docker compose up -d postgres redis minio
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Install Python packages
+        working-directory: services/api
+        run: pip install -e ../../packages/fencing-domain -e ../video-worker -e ../ml-inference -e ../../ml -e ".[dev]"
+      - name: Test
+        working-directory: services/api
+        run: pytest tests ../../packages/fencing-domain/tests -q
+        env:
+          REQUIRE_SERVICES: "1"
+      - name: Audit Python dependencies
+        working-directory: services/api
+        run: pip install pip-audit && pip-audit
+
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: apps/web/pnpm-lock.yaml
+      - working-directory: apps/web
+        run: pnpm install --frozen-lockfile
+      - working-directory: apps/web
+        run: pnpm exec tsc --noEmit
+      - working-directory: apps/web
+        run: pnpm test
+      - working-directory: apps/web
+        run: pnpm audit --audit-level high

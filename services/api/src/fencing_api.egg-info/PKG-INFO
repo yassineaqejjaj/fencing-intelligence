@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: fencing-api
+Version: 0.1.0
+Summary: Fencing Intelligence API
+Requires-Python: >=3.11
+Requires-Dist: fencing-domain
+Requires-Dist: video-worker
+Requires-Dist: ml-inference
+Requires-Dist: fencing-ml
+Requires-Dist: fastapi>=0.115
+Requires-Dist: uvicorn[standard]>=0.32
+Requires-Dist: sqlalchemy>=2.0.36
+Requires-Dist: alembic>=1.14
+Requires-Dist: psycopg[binary]>=3.2
+Requires-Dist: pydantic>=2.10
+Requires-Dist: pydantic-settings>=2.6
+Requires-Dist: argon2-cffi>=23.1
+Requires-Dist: python-multipart>=0.0.18
+Requires-Dist: redis>=5.2
+Requires-Dist: boto3>=1.35
+Requires-Dist: structlog>=24.4
+Requires-Dist: prometheus-fastapi-instrumentator>=7.0
+Requires-Dist: opentelemetry-api>=1.28
+Requires-Dist: opentelemetry-sdk>=1.28
+Requires-Dist: opentelemetry-instrumentation-fastapi>=0.49b2
+Requires-Dist: httpx>=0.28
+Requires-Dist: reportlab>=4.2
+Requires-Dist: dramatiq[redis]>=1.17
+Requires-Dist: email-validator>=2.2
+Provides-Extra: dev
+Requires-Dist: pytest>=8.3; extra == "dev"
+Provides-Extra: ml
+Requires-Dist: numpy>=2.1; extra == "ml"
+Requires-Dist: scipy>=1.14; extra == "ml"
+Requires-Dist: scikit-learn>=1.5; extra == "ml"
+Requires-Dist: opencv-python-headless>=4.10; extra == "ml"

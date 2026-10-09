@@ -1,0 +1,10 @@
+# Scrape the API from the same Docker network (service name "api"), or point
+# the target at the public host when Prometheus runs elsewhere.
+rule_files:
+  - alerts.yml
+
+scrape_configs:
+  - job_name: fencing-api
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["api:8000"]

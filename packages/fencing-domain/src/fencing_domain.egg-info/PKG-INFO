@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: fencing-domain
+Version: 0.1.0
+Summary: Weapon-agnostic fencing taxonomy, statistics, and coaching rules.
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: pytest>=8; extra == "dev"
+
+# fencing-domain
+
+Pure Python fencing taxonomy, statistics, and coaching rules.
+
+Statistics read validated records only. Rates are `null` when the denominator is zero. See `docs/STATISTICS.md` in the repository root.

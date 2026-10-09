@@ -1,0 +1,19 @@
+[project]
+name = "fencing-ml"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = ["fencing-domain"]
+
+[project.optional-dependencies]
+scientific = ["numpy>=2.1", "scipy>=1.14", "scikit-learn>=1.5"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["fencing_ml*"]
+
+[tool.uv.sources]
+fencing-domain = { path = "../packages/fencing-domain", editable = true }

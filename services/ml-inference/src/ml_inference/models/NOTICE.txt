@@ -1,0 +1,3 @@
+pose_landmarker_lite.task is Google's MediaPipe Pose Landmarker (lite, float16).
+The model and the MediaPipe runtime are used under the Apache License 2.0.
+This file estimates body landmarks. It does not classify fencing actions.

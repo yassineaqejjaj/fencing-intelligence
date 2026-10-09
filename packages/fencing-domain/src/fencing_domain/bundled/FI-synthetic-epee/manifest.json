@@ -1,0 +1,11 @@
+{
+  "name": "FI-synthetic-epee",
+  "version": "1",
+  "sample_count": 8,
+  "files": [
+    {
+      "path": "actions.csv",
+      "sha256": "f235750956e02ab846ee6cfbf83245f282273f1620c55ab76c072e1db69fd151"
+    }
+  ]
+}

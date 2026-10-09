@@ -1,0 +1,18 @@
+# Replace example.com with the public host. Caddy obtains a certificate when ports 80 and 443 reach this process.
+# The web container serves the UI and proxies /api/v1 to the API, so this single host is enough.
+example.com {
+	encode gzip
+
+	# HSTS + minimal hardening headers. Only enable HSTS once plain-HTTP
+	# traffic is fully redirected to HTTPS (Caddy does this by default).
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		-Server
+	}
+
+	reverse_proxy web:3000
+}

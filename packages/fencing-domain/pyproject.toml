@@ -1,0 +1,23 @@
+[project]
+name = "fencing-domain"
+version = "0.1.0"
+description = "Weapon-agnostic fencing taxonomy, statistics, and coaching rules."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+fencing_domain = ["bundled/FI-synthetic-epee/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

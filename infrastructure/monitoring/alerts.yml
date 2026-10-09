@@ -1,0 +1,44 @@
+groups:
+  - name: fencing-intelligence
+    interval: 30s
+    rules:
+      - alert: FencingApiDown
+        expr: up{job="fencing-api"} == 0
+        for: 2m
+        labels:
+          severity: page
+        annotations:
+          summary: "Fencing Intelligence API is not scrapeable"
+          description: "Prometheus cannot reach /metrics for 2 minutes. Check the api container and the reverse proxy."
+
+      - alert: FencingApiErrors
+        expr: |
+          sum(rate(http_requests_total{status="5xx"}[5m]))
+          /
+          sum(rate(http_requests_total[5m])) > 0.02
+        for: 5m
+        labels:
+          severity: page
+        annotations:
+          summary: "API 5xx rate above 2%"
+          description: "More than 2% of API responses are 5xx over the last 5 minutes."
+
+      - alert: FencingApiSlow
+        expr: |
+          histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le)) > 2
+        for: 10m
+        labels:
+          severity: ticket
+        annotations:
+          summary: "API p95 latency above 2s"
+          description: "95th percentile request duration exceeds 2 seconds over 10 minutes. Check DB, Redis, and object storage."
+
+      - alert: FencingUploadFailures
+        expr: |
+          sum(rate(http_requests_total{handler=~"/api/v1/videos.*",status="5xx"}[15m])) > 0.01
+        for: 15m
+        labels:
+          severity: ticket
+        annotations:
+          summary: "Video endpoints returning 5xx"
+          description: "Upload/processing endpoints are failing. Check object storage, disk space, and worker logs."

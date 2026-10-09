@@ -1,0 +1,10 @@
+pyproject.toml
+src/ml_inference/__init__.py
+src/ml_inference/frames.py
+src/ml_inference/movement.py
+src/ml_inference/scoreboard.py
+src/ml_inference.egg-info/PKG-INFO
+src/ml_inference.egg-info/SOURCES.txt
+src/ml_inference.egg-info/dependency_links.txt
+src/ml_inference.egg-info/requires.txt
+src/ml_inference.egg-info/top_level.txt

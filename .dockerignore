@@ -1,0 +1,16 @@
+# Keep image build contexts small and never bake local secrets or datasets.
+.git
+.gitignore
+.venv
+**/node_modules
+**/.next
+**/__pycache__
+**/*.pyc
+.env
+.env.*
+data/
+backups/
+*.dump
+*.mp4
+tmp/
+.cursor/

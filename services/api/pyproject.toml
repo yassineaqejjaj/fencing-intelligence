@@ -1,0 +1,60 @@
+[project]
+name = "fencing-api"
+version = "0.1.0"
+description = "Fencing Intelligence API"
+requires-python = ">=3.11"
+dependencies = [
+  "fencing-domain",
+  "video-worker",
+  "ml-inference",
+  "fencing-ml",
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.32",
+  "sqlalchemy>=2.0.36",
+  "alembic>=1.14",
+  "psycopg[binary]>=3.2",
+  "pydantic>=2.10",
+  "pydantic-settings>=2.6",
+  "argon2-cffi>=23.1",
+  "python-multipart>=0.0.18",
+  "redis>=5.2",
+  "boto3>=1.35",
+  "structlog>=24.4",
+  "prometheus-fastapi-instrumentator>=7.0",
+  "opentelemetry-api>=1.28",
+  "opentelemetry-sdk>=1.28",
+  "opentelemetry-instrumentation-fastapi>=0.49b2",
+  "httpx>=0.28",
+  "reportlab>=4.2",
+  "dramatiq[redis]>=1.17",
+  "email-validator>=2.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3"]
+ml = [
+  "numpy>=2.1",
+  "scipy>=1.14",
+  "scikit-learn>=1.5",
+  "opencv-python-headless>=4.10",
+]
+
+[project.scripts]
+datasets = "fencing_api.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.uv.sources]
+fencing-domain = { path = "../../packages/fencing-domain", editable = true }
+video-worker = { path = "../video-worker", editable = true }
+ml-inference = { path = "../ml-inference", editable = true }
+fencing-ml = { path = "../../ml", editable = true }

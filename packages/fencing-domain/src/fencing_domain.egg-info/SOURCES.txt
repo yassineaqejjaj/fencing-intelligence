@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+src/fencing_domain/__init__.py
+src/fencing_domain/recommendations.py
+src/fencing_domain/registry.py
+src/fencing_domain/statistics.py
+src/fencing_domain/taxonomy.py
+src/fencing_domain.egg-info/PKG-INFO
+src/fencing_domain.egg-info/SOURCES.txt
+src/fencing_domain.egg-info/dependency_links.txt
+src/fencing_domain.egg-info/requires.txt
+src/fencing_domain.egg-info/top_level.txt
+tests/test_recommendations.py
+tests/test_statistics.py
