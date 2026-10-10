@@ -147,7 +147,22 @@ def _club_out(row: Club) -> dict:
     return {"id": str(row.id), "name": row.name, "country": row.country, "city": row.city}
 
 
-def _athlete_out(row: Athlete, db: Session | None = None) -> dict:
+def _fie_summary(profile: dict | None) -> dict | None:
+    if not isinstance(profile, dict):
+        return None
+    record = profile.get("record") if isinstance(profile.get("record"), dict) else {}
+    return {
+        "fie_id": profile.get("fie_id"),
+        "rank": profile.get("rank"),
+        "points": profile.get("points"),
+        "season": profile.get("season"),
+        "source_url": profile.get("source_url"),
+        "wins": record.get("wins"),
+        "losses": record.get("losses"),
+    }
+
+
+def _athlete_out(row: Athlete, db: Session | None = None, *, include_profile: bool = False) -> dict:
     minor = is_minor(row.birth_year)
     consent: bool | None = guardian_consent_granted(db, row.id) if (db is not None and minor) else None
     return {
@@ -165,6 +180,10 @@ def _athlete_out(row: Athlete, db: Session | None = None) -> dict:
         "category": row.category,
         "is_minor": minor,
         "guardian_consent_granted": consent,
+        "fie_id": row.fie_id,
+        "fie_synced_at": row.fie_synced_at.isoformat() if row.fie_synced_at else None,
+        "fie_summary": _fie_summary(row.fie_profile),
+        "fie_profile": row.fie_profile if include_profile else None,
     }
 
 
@@ -229,7 +248,7 @@ def create_athlete(payload: AthleteIn, principal: Principal = Depends(require_ro
 
 @router.get("/athletes/{athlete_id}")
 def get_athlete(athlete_id: uuid.UUID, principal: Principal = Depends(require_role("viewer")), db: Session = Depends(get_db)):
-    return _athlete_out(require_athlete(db, principal, athlete_id), db)
+    return _athlete_out(require_athlete(db, principal, athlete_id), db, include_profile=True)
 
 
 @router.patch("/athletes/{athlete_id}")

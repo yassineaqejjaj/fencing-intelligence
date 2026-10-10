@@ -48,6 +48,65 @@ export type User = {
   memberships: { organization_id: string; organization_name: string; role: string }[];
 };
 
+export type FieSummary = {
+  fie_id: number;
+  rank: number | null;
+  points: string | null;
+  season: number | null;
+  source_url: string;
+  wins: number;
+  losses: number;
+};
+
+export type FieProfile = {
+  source_url: string;
+  fetched_at: string;
+  note: string;
+  fie_id: number;
+  display_name: string;
+  country: string;
+  country_code: string;
+  gender: string;
+  weapon: string | null;
+  hand: string | null;
+  birth_date: string | null;
+  height_cm: number | null;
+  license_number: string;
+  license_status: string;
+  rank: number | null;
+  points: string | null;
+  season: number | null;
+  ranking: { season: number | null; weapon: string | null; category: string; rank: number | null; points: string | null }[];
+  medal_counts: Record<string, { gold: number; silver: number; bronze: number }>;
+  medals: { name: string; medal: string; location: string; country: string; date: string | null; season: number | null }[];
+  upcoming: { name: string; city: string; country: string; kind: string; start_date: string | null; end_date: string | null }[];
+  record: { wins: number; losses: number; bouts: number; opponents: number; truncated: boolean };
+  opponents: { fie_id: number | null; name: string; country: string; wins: number; losses: number }[];
+  bouts: {
+    opponent: string;
+    opponent_country: string;
+    competition: string;
+    date: string;
+    location: string;
+    season: number | null;
+    for_score: number | null;
+    against_score: number | null;
+    won: boolean;
+  }[];
+};
+
+export type FieSearchHit = {
+  fie_id: number;
+  name: string;
+  country: string;
+  country_code: string;
+  weapon: string | null;
+  rank: number | null;
+  points: string | null;
+  age: number | null;
+  source_url: string;
+};
+
 export type Athlete = {
   id: string;
   display_name: string;
@@ -62,6 +121,10 @@ export type Athlete = {
   category: string;
   is_minor: boolean;
   guardian_consent_granted: boolean | null;
+  fie_id: number | null;
+  fie_synced_at: string | null;
+  fie_summary: FieSummary | null;
+  fie_profile: FieProfile | null;
 };
 
 export const CATEGORIES = ["u11", "u13", "u15", "u17", "u20", "senior", "veteran", "unspecified"] as const;

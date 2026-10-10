@@ -127,6 +127,13 @@ class Athlete(Base):
             unique=True,
             postgresql_where=text("license_number <> ''"),
         ),
+        Index(
+            "uq_athlete_org_fie",
+            "organization_id",
+            "fie_id",
+            unique=True,
+            postgresql_where=text("fie_id IS NOT NULL"),
+        ),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=_uuid)
@@ -142,6 +149,9 @@ class Athlete(Base):
     license_number: Mapped[str] = mapped_column(String(40), default="", nullable=False)
     birth_year: Mapped[int | None] = mapped_column(Integer)
     category: Mapped[str] = mapped_column(String(16), default="unspecified", nullable=False)
+    fie_id: Mapped[int | None] = mapped_column(Integer)
+    fie_synced_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    fie_profile: Mapped[dict | None] = mapped_column(JSONB)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
 
