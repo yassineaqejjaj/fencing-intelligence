@@ -12,7 +12,7 @@ from fencing_api.config import get_settings
 from fencing_api.database import SessionLocal
 from fencing_api.errors import AppError
 from fencing_api.logging_config import configure_logging
-from fencing_api.routers import analyses, annotations, auth, catalog, federation, fie, insights, privacy, research, videos
+from fencing_api.routers import analyses, annotations, auth, catalog, federation, insights, privacy, research, videos
 from fencing_api.seed import seed
 from fencing_api.storage import ensure_bucket
 
@@ -81,7 +81,7 @@ def create_app() -> FastAPI:
         ok = all(checks.values())
         return JSONResponse(status_code=200 if ok else 503, content={"status": "ready" if ok else "not_ready", "checks": checks})
 
-    for module in (auth, catalog, videos, annotations, insights, analyses, research, privacy, federation, fie):
+    for module in (auth, catalog, videos, annotations, insights, analyses, research, privacy, federation):
         app.include_router(module.router, prefix="/api/v1")
     Instrumentator().instrument(app).expose(app, endpoint="/metrics", include_in_schema=False)
     return app

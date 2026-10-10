@@ -2,7 +2,6 @@
 
 import { useParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { FieRecord } from "@/components/fie-record";
 import { IntelligenceView } from "@/components/intelligence-view";
 import { StatsView } from "@/components/stats-view";
 import { buttonClass, ErrorNote, Field, inputClass, Loading } from "@/components/states";
@@ -118,7 +117,6 @@ export default function AthletePage() {
         </form>
         {save.isError ? <div className="mt-3"><ErrorNote error={save.error} /></div> : null}
       </Card>
-      <FieRecord athlete={row} />
       {intelligence.isError ? <ErrorNote error={intelligence.error} /> : null}
       {intelligence.data ? <IntelligenceView data={intelligence.data} /> : null}
       {stats.data ? <StatsView stats={stats.data} /> : null}

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
-import { FieSearch } from "@/components/fie-record";
 import { CATEGORIES, api, type Athlete } from "@/lib/api";
 import { buttonClass, Empty, ErrorNote, Field, inputClass, Loading } from "@/components/states";
 import { Avatar, Badge, Card, PageHeader, RowLink } from "@/components/ui";
@@ -72,7 +71,6 @@ export default function AthletesPage() {
         </form>
         {error ? <div className="mt-3"><ErrorNote error={error} /></div> : null}
       </Card>
-      <FieSearch />
       {athletes.data?.items.length ? (
         <ul className="grid gap-3 md:grid-cols-2">
           {athletes.data.items.map((athlete, index) => (
@@ -86,7 +84,6 @@ export default function AthletesPage() {
                       <Badge tone="info">{athlete.weapon}</Badge>
                       {athlete.dominant_hand} hand
                       {athlete.license_number ? <span className="font-mono">{athlete.license_number}</span> : <span>No license</span>}
-                      {athlete.fie_summary?.rank != null ? <span className="font-mono">FIE #{athlete.fie_summary.rank}</span> : null}
                       {athlete.category !== "unspecified" ? <span>{athlete.category}</span> : null}
                     </span>
                   </span>
