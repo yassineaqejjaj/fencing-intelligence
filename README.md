@@ -2,6 +2,8 @@
 
 <!-- portfolio-summary:start -->
 
+![Project overview](docs/assets/github-cover.svg)
+
 > **Human-validated fencing video analysis** | **Status:** Experimental beta; detection heuristics are not validated refereeing.
 >
 > [Live application](https://fencing-intelligence.vercel.app) · [Architecture](README.md#run-locally) · [Demo / verification](README.md#what-you-can-do) · [Source code](https://github.com/yassineaqejjaj/fencing-intelligence)
