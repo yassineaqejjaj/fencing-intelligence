@@ -1,5 +1,16 @@
 # Fencing Intelligence
 
+<!-- portfolio-summary:start -->
+
+> **Human-validated fencing video analysis** | **Status:** Experimental beta; detection heuristics are not validated refereeing.
+>
+> [Live application](https://fencing-intelligence.vercel.app) · [Architecture](README.md#run-locally) · [Demo / verification](README.md#what-you-can-do) · [Source code](https://github.com/yassineaqejjaj/fencing-intelligence)
+
+[![GitHub Actions](https://github.com/yassineaqejjaj/fencing-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/yassineaqejjaj/fencing-intelligence/actions/workflows/ci.yml)
+
+<!-- portfolio-summary:end -->
+
+
 Self-hosted fencing video analysis for épée, foil, and sabre. Coaches and athletes upload video, annotate actions, record touches, and read statistics that come only from validated records.
 
 The application is useful without a trained fencing model. Movement and scoreboard detectors are experimental heuristics. They do not claim recognition accuracy, and they do not decide referee priority.
