@@ -42,6 +42,9 @@ jobs:
           cache-dependency-path: apps/web/pnpm-lock.yaml
       - working-directory: apps/web
         run: pnpm install --frozen-lockfile
+      - name: Generate route types
+        working-directory: apps/web
+        run: pnpm exec next typegen
       - working-directory: apps/web
         run: pnpm exec tsc --noEmit
       - working-directory: apps/web
