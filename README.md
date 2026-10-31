@@ -79,3 +79,9 @@ The Python suite needs the Compose services and FFmpeg. It creates the `fencing_
 ## License
 
 Original code is Apache-2.0. See `LICENSE` and `docs/LICENSES.md`.
+
+---
+
+## Part of an engineering approach
+
+Built with the [Agentic SDLC framework](https://github.com/yassineaqejjaj/agentic-sdlc) (earned autonomy). Read how this project was built and what its checks caught in the [case study](https://github.com/yassineaqejjaj/agentic-sdlc/blob/main/docs/case-studies/fencing-intelligence.md).
