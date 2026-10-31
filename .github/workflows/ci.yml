@@ -15,7 +15,7 @@ jobs:
       - name: Start data services
         run: docker compose up -d postgres redis minio
       - name: Install FFmpeg
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg libegl1 libgles2
       - name: Install Python packages
         working-directory: services/api
         run: pip install -e ../../packages/fencing-domain -e ../video-worker -e ../ml-inference -e ../../ml -e ".[dev]"
