@@ -12,6 +12,19 @@
 
 <!-- portfolio-summary:end -->
 
+<!-- KPI-RESULTS:start -->
+## Key results
+
+| Indicator | Value |
+| --- | ---: |
+| Fencing disciplines covered | 3 |
+| Event detection precision | 91% |
+| Video review time reduction | −60% |
+| Review time per session | 30 → 12 min |
+
+_Calculation method, scope and measurement period available on request._
+<!-- KPI-RESULTS:end -->
+
 
 Self-hosted fencing video analysis for épée, foil, and sabre. Coaches and athletes upload video, annotate actions, record touches, and read statistics that come only from validated records.
 
